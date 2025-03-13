@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Arene_light.dir/arbitre.cpp.o.d"
   "CMakeFiles/Arene_light.dir/jeu.cpp.o"
   "CMakeFiles/Arene_light.dir/jeu.cpp.o.d"
+  "CMakeFiles/Arene_light.dir/joueurs/joueur_MCTS.cpp.o"
+  "CMakeFiles/Arene_light.dir/joueurs/joueur_MCTS.cpp.o.d"
   "CMakeFiles/Arene_light.dir/main.cpp.o"
   "CMakeFiles/Arene_light.dir/main.cpp.o.d"
 )

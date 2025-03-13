@@ -214,6 +214,30 @@ jeu.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Arene_light.dir/build.make CMakeFiles/Arene_light.dir/jeu.cpp.s
 .PHONY : jeu.cpp.s
 
+joueurs/joueur_MCTS.o: joueurs/joueur_MCTS.cpp.o
+.PHONY : joueurs/joueur_MCTS.o
+
+# target to build an object file
+joueurs/joueur_MCTS.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Arene_light.dir/build.make CMakeFiles/Arene_light.dir/joueurs/joueur_MCTS.cpp.o
+.PHONY : joueurs/joueur_MCTS.cpp.o
+
+joueurs/joueur_MCTS.i: joueurs/joueur_MCTS.cpp.i
+.PHONY : joueurs/joueur_MCTS.i
+
+# target to preprocess a source file
+joueurs/joueur_MCTS.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Arene_light.dir/build.make CMakeFiles/Arene_light.dir/joueurs/joueur_MCTS.cpp.i
+.PHONY : joueurs/joueur_MCTS.cpp.i
+
+joueurs/joueur_MCTS.s: joueurs/joueur_MCTS.cpp.s
+.PHONY : joueurs/joueur_MCTS.s
+
+# target to generate assembly for a file
+joueurs/joueur_MCTS.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Arene_light.dir/build.make CMakeFiles/Arene_light.dir/joueurs/joueur_MCTS.cpp.s
+.PHONY : joueurs/joueur_MCTS.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -257,6 +281,9 @@ help:
 	@echo "... jeu.o"
 	@echo "... jeu.i"
 	@echo "... jeu.s"
+	@echo "... joueurs/joueur_MCTS.o"
+	@echo "... joueurs/joueur_MCTS.i"
+	@echo "... joueurs/joueur_MCTS.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
