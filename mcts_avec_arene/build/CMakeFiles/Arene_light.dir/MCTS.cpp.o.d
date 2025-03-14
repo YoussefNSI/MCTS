@@ -182,4 +182,68 @@ CMakeFiles/Arene_light.dir/MCTS.cpp.o: \
  /usr/include/c++/12/algorithm /usr/include/c++/12/bits/stl_algo.h \
  /usr/include/c++/12/bits/algorithmfwd.h \
  /usr/include/c++/12/bits/stl_heap.h \
- /usr/include/c++/12/bits/uniform_int_dist.h
+ /usr/include/c++/12/bits/uniform_int_dist.h /usr/include/c++/12/fstream \
+ /usr/include/c++/12/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/12/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/12/bits/c++io.h \
+ /usr/include/c++/12/bits/fstream.tcc /usr/include/c++/12/sstream \
+ /usr/include/c++/12/bits/sstream.tcc /usr/include/c++/12/stack \
+ /usr/include/c++/12/deque /usr/include/c++/12/bits/stl_deque.h \
+ /usr/include/c++/12/bits/deque.tcc /usr/include/c++/12/bits/stl_stack.h \
+ /usr/include/c++/12/unordered_map /usr/include/c++/12/bits/hashtable.h \
+ /usr/include/c++/12/bits/hashtable_policy.h \
+ /usr/include/c++/12/bits/enable_special_members.h \
+ /usr/include/c++/12/bits/unordered_map.h \
+ /usr/include/c++/12/bits/erase_if.h /usr/include/c++/12/queue \
+ /usr/include/c++/12/bits/stl_queue.h /usr/include/c++/12/unordered_set \
+ /usr/include/c++/12/bits/unordered_set.h /usr/include/c++/12/regex \
+ /usr/include/c++/12/bitset /usr/include/c++/12/locale \
+ /usr/include/c++/12/bits/locale_facets_nonio.h \
+ /usr/include/x86_64-linux-gnu/c++/12/bits/time_members.h \
+ /usr/include/x86_64-linux-gnu/c++/12/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/12/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/12/bits/locale_conv.h \
+ /usr/include/c++/12/bits/std_function.h \
+ /usr/include/c++/12/bits/stl_tree.h /usr/include/c++/12/bits/stl_map.h \
+ /usr/include/c++/12/bits/regex_constants.h \
+ /usr/include/c++/12/bits/regex_error.h \
+ /usr/include/c++/12/bits/regex_automaton.h \
+ /usr/include/c++/12/bits/regex_automaton.tcc \
+ /usr/include/c++/12/bits/regex_scanner.h \
+ /usr/include/c++/12/bits/regex_scanner.tcc \
+ /usr/include/c++/12/bits/regex_compiler.h \
+ /usr/include/c++/12/bits/regex_compiler.tcc \
+ /usr/include/c++/12/bits/regex.h /usr/include/c++/12/bits/regex.tcc \
+ /usr/include/c++/12/bits/regex_executor.h \
+ /usr/include/c++/12/bits/regex_executor.tcc \
+ /usr/include/rapidjson/document.h /usr/include/rapidjson/reader.h \
+ /usr/include/rapidjson/allocators.h /usr/include/rapidjson/rapidjson.h \
+ /usr/include/c++/12/cstring /usr/include/string.h /usr/include/strings.h \
+ /usr/include/inttypes.h /usr/include/c++/12/cassert \
+ /usr/include/assert.h /usr/include/rapidjson/stream.h \
+ /usr/include/rapidjson/encodings.h \
+ /usr/include/rapidjson/encodedstream.h \
+ /usr/include/rapidjson/memorystream.h \
+ /usr/include/rapidjson/internal/meta.h \
+ /usr/include/rapidjson/rapidjson.h \
+ /usr/include/rapidjson/internal/stack.h \
+ /usr/include/rapidjson/allocators.h \
+ /usr/include/rapidjson/internal/swap.h \
+ /usr/include/rapidjson/internal/strtod.h \
+ /usr/include/rapidjson/internal/ieee754.h \
+ /usr/include/rapidjson/internal/biginteger.h \
+ /usr/include/rapidjson/internal/diyfp.h \
+ /usr/include/rapidjson/internal/pow10.h \
+ /usr/include/rapidjson/error/error.h /usr/include/rapidjson/rapidjson.h \
+ /usr/include/rapidjson/internal/strfunc.h \
+ /usr/include/rapidjson/stream.h /usr/include/c++/12/iterator \
+ /usr/include/c++/12/bits/stream_iterator.h /usr/include/c++/12/utility \
+ /usr/include/c++/12/bits/stl_relops.h \
+ /usr/include/rapidjson/prettywriter.h /usr/include/rapidjson/writer.h \
+ /usr/include/rapidjson/internal/dtoa.h \
+ /usr/include/rapidjson/internal/itoa.h \
+ /usr/include/rapidjson/internal/itoa.h \
+ /usr/include/rapidjson/stringbuffer.h \
+ /usr/include/rapidjson/stringbuffer.h \
+ /usr/include/rapidjson/filereadstream.h \
+ /usr/include/rapidjson/filewritestream.h

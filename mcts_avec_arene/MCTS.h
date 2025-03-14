@@ -26,18 +26,19 @@ public:
 class MCTS {
 private:
     std::shared_ptr<Noeud> racine;
-    const double exploration_param = 1.4142;
+    const double exploration_param = 2.5;
     Jeu jeu_courant;
+    bool mode_entrainement;
 
     void reconstruire_etat(Jeu& game, int state_val);
     std::shared_ptr<Noeud> selection(std::shared_ptr<Noeud> noeud);
     std::shared_ptr<Noeud> expansion(std::shared_ptr<Noeud> noeud);
     double simulation(std::shared_ptr<Noeud> noeud);
-    void retropropagation(std::shared_ptr<Noeud> noeud, double resultat);
     std::shared_ptr<Noeud> meilleur_enfant_ucb(std::shared_ptr<Noeud> parent);
 
 public:
     MCTS();
+    void retropropagation(std::shared_ptr<Noeud> noeud, double resultat);
     void effectuer_recherche(int iterations);
     int meilleur_coup();
     std::shared_ptr<Noeud> get_root() { return racine; }
@@ -45,4 +46,8 @@ public:
         racine.reset();
         racine = std::make_shared<Noeud>(nouvel_etat);
     }
+    void enable_entrainement() { mode_entrainement = true; }
+    void disable_entrainement() { mode_entrainement = false; }
+    void save_arbre(const std::string& filename);
+    void load_arbre(const std::string& filename);
 };

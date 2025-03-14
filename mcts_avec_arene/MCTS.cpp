@@ -1,6 +1,18 @@
 #include "MCTS.h"
 #include <limits>
 #include <algorithm>
+#include <fstream>
+#include <sstream>
+#include <stack>
+#include <unordered_map>
+#include <queue>
+#include <unordered_set>
+#include <regex>
+#include <rapidjson/document.h>
+#include <rapidjson/prettywriter.h>
+#include <rapidjson/stringbuffer.h>
+#include <rapidjson/filereadstream.h>
+#include <rapidjson/filewritestream.h>
 
 Noeud::Noeud(int state, std::shared_ptr<Noeud> p, int coup)
     : state_val(state), visite_count(0), total_reward(0.0),
@@ -165,4 +177,124 @@ int MCTS::meilleur_coup()
         }
     }
     return meilleur;
+}
+
+
+using namespace rapidjson;
+
+void MCTS::save_arbre(const std::string& filename) {
+    Document d(kObjectType);
+    Document::AllocatorType& allocator = d.GetAllocator();
+    
+    std::unordered_map<std::shared_ptr<Noeud>, int> node_ids;
+    std::queue<std::shared_ptr<Noeud>> queue;
+    int current_id = 0;
+    
+    // Sauvegarde de la racine
+    queue.push(racine);
+    node_ids[racine] = current_id++;
+    
+    Value nodes(kObjectType);
+    while (!queue.empty()) {
+        auto node = queue.front();
+        queue.pop();
+        
+        Value nodeValue(kObjectType);
+        nodeValue.AddMember("state", node->state_val, allocator);
+        nodeValue.AddMember("visits", node->visite_count, allocator);
+        nodeValue.AddMember("reward", node->total_reward, allocator);
+        nodeValue.AddMember("coup", node->coup_from_parent, allocator);
+        
+        // Parent
+        if (auto parent = node->parent.lock()) {
+            nodeValue.AddMember("parent", node_ids[parent], allocator);
+        } else {
+            nodeValue.AddMember("parent", -1, allocator);
+        }
+        
+        // Enfants
+        Value children(kArrayType);
+        for (auto& child : node->enfants) {
+            if (!node_ids.count(child)) {
+                node_ids[child] = current_id++;
+                queue.push(child);
+            }
+            children.PushBack(node_ids[child], allocator);
+        }
+        nodeValue.AddMember("children", children, allocator);
+        
+        // Ajout au document
+        nodes.AddMember(Value(std::to_string(node_ids[node]).c_str(), allocator), nodeValue, allocator);
+    }
+    
+    d.AddMember("nodes", nodes, allocator);
+    d.AddMember("root_id", node_ids[racine], allocator);
+    
+    // Écriture fichier
+    FILE* fp = fopen(filename.c_str(), "wb");
+    char writeBuffer[65536];
+    FileWriteStream os(fp, writeBuffer, sizeof(writeBuffer));
+    PrettyWriter<FileWriteStream> writer(os);
+    d.Accept(writer);
+    fclose(fp);
+}
+
+void MCTS::load_arbre(const std::string& filename) {
+    FILE* fp = fopen(filename.c_str(), "rb");
+    if (!fp) throw std::runtime_error("Cannot open file");
+    
+    char readBuffer[65536];
+    FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+    Document d;
+    d.ParseStream(is);
+    fclose(fp);
+    
+    if (!d.HasMember("nodes") || !d.HasMember("root_id"))
+        throw std::runtime_error("Format de fichier invalide");
+    
+    std::unordered_map<int, std::shared_ptr<Noeud>> node_map;
+    const Value& nodes = d["nodes"];
+    
+    // Première passe : créer tous les noeuds
+    for (Value::ConstMemberIterator itr = nodes.MemberBegin(); itr != nodes.MemberEnd(); ++itr) {
+        int id = std::stoi(itr->name.GetString());
+        const Value& nodeValue = itr->value;
+        
+        auto node = std::make_shared<Noeud>(
+            nodeValue["state"].GetInt(),
+            nullptr,
+            nodeValue["coup"].GetInt()
+        );
+        node->visite_count = nodeValue["visits"].GetInt();
+        node->total_reward = nodeValue["reward"].GetDouble();
+        
+        node_map[id] = node;
+    }
+    
+    // Deuxième passe : lier les relations
+    for (Value::ConstMemberIterator itr = nodes.MemberBegin(); itr != nodes.MemberEnd(); ++itr) {
+        int id = std::stoi(itr->name.GetString());
+        const Value& nodeValue = itr->value;
+        auto node = node_map[id];
+        
+        // Parent
+        int parent_id = nodeValue["parent"].GetInt();
+        if (parent_id != -1) {
+            node->parent = node_map[parent_id];
+        }
+        
+        // Enfants
+        const Value& children = nodeValue["children"];
+        for (SizeType i = 0; i < children.Size(); i++) {
+            node->enfants.push_back(node_map[children[i].GetInt()]);
+        }
+    }
+    
+    // Définir la racine
+    int root_id = d["root_id"].GetInt();
+    if (node_map.count(root_id)) {
+        racine = node_map[root_id];
+    } else {
+        throw std::runtime_error("Noeud racine introuvable");
+    }
 }

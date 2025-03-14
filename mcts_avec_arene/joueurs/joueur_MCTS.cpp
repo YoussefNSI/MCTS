@@ -7,7 +7,7 @@ Joueur_MCTS::Joueur_MCTS(std::string nom, bool joueur, int nb_iterations)
 
 void Joueur_MCTS::initialisation() {
     // Initialisation une fois au début du programme
-    mcts_engine->reset(RACINE);
+    mcts_engine->load_arbre("expert_mcts.tree");
 }
 
 void Joueur_MCTS::init_partie() {
@@ -20,6 +20,8 @@ char Joueur_MCTS::nom_abbrege() const {
 }
 
 void Joueur_MCTS::recherche_coup(Jeu jeu, int& coup) {
+    mcts_engine->disable_entrainement();
+
     // Synchronisation avec l'état actuel
     mcts_engine->reset(jeu.get_etat());
     
