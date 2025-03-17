@@ -25,5 +25,18 @@ class Jeu {
   bool pat();
   bool victoire();
 
-  int random(int n);
+  
+  int getEtat() { return _etat._val; };
+
+
+
+int random(int n) // entre 1 et n inclus
+{
+    std::srand(time({}));
+    int lowest=1;
+    int range=(n-lowest)+1;
+
+    return lowest + rand() % range;
+}
+
 };

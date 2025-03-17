@@ -1,4 +1,5 @@
 #include "MCTS.h"
+#include <fstream>
 
 
 void Noeud::ajouterNoeud(std::shared_ptr<Noeud> n)
@@ -11,7 +12,7 @@ void Noeud::ajouterNoeud(std::shared_ptr<Noeud> n)
 
 
 
-int Noeud::score(Jeu j)
+int MCTS::score(Jeu j)
 {
     if ( j.victoire() ) return 1;
     else if ( j.pat() ) return 0;
@@ -19,29 +20,32 @@ int Noeud::score(Jeu j)
 
 }
 
-std::shared_ptr<Noeud> Noeud::UBC(std::shared_ptr<Noeud> filsA, std::shared_ptr<Noeud> filsB)
+std::shared_ptr<Noeud> MCTS::UBC(std::shared_ptr<Noeud> filsA, std::shared_ptr<Noeud> filsB)
 {
-    float UBC_a = filsA->gain_accumule + sqrt(2 * log(compteur_scenario) / filsA->compteur_scenario);
-    float UBC_b = filsB->gain_accumule + sqrt(2 * log(compteur_scenario) / filsB->compteur_scenario);
+     float UBC_a, UBC_b;
+
+    if (filsA->getNbScenario() != 0)
+        UBC_a = filsA->getGain() + sqrt(2 * log(racine->getNbScenario() ) / filsA->getNbScenario() );
+    else if (filsB->getNbScenario() != 0)
+        UBC_b = filsB->getGain() + sqrt(2 * log(racine->getNbScenario() ) / filsB->getNbScenario() );
+    
+    else
+    {
+        UBC_a = 1;
+        UBC_b = 0;
+    } 
 
     if ( UBC_a > UBC_b )
         return filsA;
     else
         return filsB;
 
-    //return max(UBC_a,UBC_b); 
-
-    // return gain_du_fils + sqrt(2 * log(nb_scénarios_père) / nb_scénario_fils)
-
 }
 
- 
 
-//UBC (etat,numero_coup) : gain_du_fils + sqrt(2 * log(nb_scénarios_père) / nb_scénario_fils)
-
-
-void Noeud::descente(Jeu j,int & coup) // coup = 1 au 1er appel
+void MCTS::descente(Jeu j,int & coup) // coup = 1 au 1er appel
 {
+   
    
     if (!j.terminal())
     {
@@ -54,8 +58,8 @@ void Noeud::descente(Jeu j,int & coup) // coup = 1 au 1er appel
             }
             
             j.joue(coup);
-            std::shared_ptr<Noeud> fils = std::make_shared<Noeud>(j,shared_from_this());
-            ajouterNoeud(fils);
+            std::shared_ptr<Noeud> fils = std::make_shared<Noeud>(j,racine,coup);
+            racine->ajouterNoeud(fils);
             
             ++coup;
         }
@@ -70,15 +74,15 @@ void Noeud::descente(Jeu j,int & coup) // coup = 1 au 1er appel
 
                 std::cout << "il faut faire UBC" << std::endl;
 
-                std::shared_ptr<Noeud> filsA = std::make_shared<Noeud>(j,shared_from_this());
-                ajouterNoeud(filsA);
+                std::shared_ptr<Noeud> filsA = std::make_shared<Noeud>(j,racine,coup);
+                racine->ajouterNoeud(filsA);
                 //std::cout << "coup joué : " << coup_A << std::endl;
                 j.joue(coup_A);
                 ++coup_A;
 
                 
-                std::shared_ptr<Noeud> filsB = std::make_shared<Noeud>(j,shared_from_this());
-                ajouterNoeud(filsB);
+                std::shared_ptr<Noeud> filsB = std::make_shared<Noeud>(j,racine,coup);
+                racine->ajouterNoeud(filsB);
                 //std::cout << "coup joué : " << coup_A << std::endl;
                 j.joue(coup_B);
                 ++coup_B;
@@ -93,29 +97,12 @@ void Noeud::descente(Jeu j,int & coup) // coup = 1 au 1er appel
         }
     }
    
-    // while (!j.terminal()) // pas une feuille
-    // {
-        
-    //     while ( coup < j.nb_coups() )
-    //     {
-           
-            
-    //         std::cout << "coup joué : " << coup << std::endl;
-    //         j.joue(coup);
-    //         std::shared_ptr<Noeud> fils = std::make_shared<Noeud>(j,shared_from_this());
-    //         ajouterNoeud(fils);
-            
-    //         ++coup;
-    //     }
 
-
-    // }
-    // return coup;
 }
 
 
 
-int Noeud::roll_out(Jeu j)
+int MCTS::roll_out(Jeu j)
 {
     int coup;
     while (!j.terminal()) // pas une feuille
@@ -124,21 +111,139 @@ int Noeud::roll_out(Jeu j)
         std::cout << "coup joué : " << coup << std::endl;
         j.joue(coup);
 
-        std::shared_ptr<Noeud> fils = std::make_shared<Noeud>(j,nullptr);
-        ajouterNoeud(fils);
+        std::shared_ptr<Noeud> fils = std::make_shared<Noeud>(j,racine,coup);
+        racine->ajouterNoeud(fils);
 
     }
     return score(j); 
 }
 
-void Noeud::update(int score)
+void MCTS::update(std::shared_ptr<Noeud> n, int score)
 {
-    ++compteur_scenario;
-    gain_accumule += score;
-
-    if (parent != nullptr)
-    {
-        parent->update(score);
+     while (n) { 
+        n->augmenterNbScenario();
+        n->setGain(score);
+        n = n->getParent();
     }
 
 }
+
+int MCTS::meilleur_coup()
+{
+    int meilleur = -1;
+    int max_visites = -1;
+
+    for (auto &enfant : racine->getFils())
+    {
+        if (enfant->getNbScenario() > max_visites)
+        {
+            max_visites = enfant->getNbScenario();
+            meilleur = enfant->getCoupParent();
+        }
+    }
+    return meilleur;
+}
+    
+void MCTS::rechercher(int iterations)
+{
+    for (int i = 0; i< iterations; ++i)
+    {
+        int coup = 1;
+        descente(jeu_courant, coup);
+        int score = roll_out(jeu_courant);
+        update(racine,score);
+    }
+
+}
+
+
+void MCTS::load_arbre(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file) {
+        std::cerr << "Aucun fichier trouvé, démarrage avec un nouvel arbre.\n";
+        return;
+    }
+
+    std::map<int, std::shared_ptr<Noeud>> noeuds;
+    int id, coup_parent, gain, nb_scenario, nb_fils;
+
+    while (file >> id >> coup_parent >> gain >> nb_scenario >> nb_fils) {
+        auto noeud = std::make_shared<Noeud>(jeu_courant, nullptr, coup_parent);
+        noeud->setGain(gain);
+        noeud->setNbScenario(nb_scenario);
+        noeuds[id] = noeud;
+
+        for (int i = 0; i < nb_fils; ++i) {
+            int id_fils;
+            file >> id_fils;
+            if (noeuds.find(id_fils) != noeuds.end()) {
+                noeud->ajouterNoeud(noeuds[id_fils]);
+            }
+        }
+    }
+
+    if (!noeuds.empty()) {
+        racine = noeuds[0];  // Réassigner la racine
+        std::cout << "Arbre chargé avec succès !\n";
+    }
+
+    file.close();
+}
+
+
+
+void MCTS::save_arbre(const std::string& filename) {
+    std::ofstream file(filename);
+    if (!file) {
+        std::cerr << "Erreur : Impossible d'ouvrir " << filename << " pour sauvegarde.\n";
+        return;
+    }
+
+    std::queue<std::shared_ptr<Noeud>> queue;
+    queue.push(racine);
+
+    int id = 0;
+    std::map<std::shared_ptr<Noeud>, int> id_map; // Associer chaque nœud à un ID
+    id_map[racine] = id;
+
+    while (!queue.empty()) {
+        std::shared_ptr<Noeud> noeud = queue.front();
+        queue.pop();
+
+        file << id_map[noeud] << " "
+             << noeud->getCoupParent() << " "
+             << noeud->getGain() << " "
+             << noeud->getNbScenario() << " "
+             << noeud->getFils().size();
+
+        for (const auto& fils : noeud->getFils()) {
+            id++;
+            id_map[fils] = id;  // Associe un nouvel ID au fils
+            file << " " << id;
+            queue.push(fils);
+        }
+
+        file << "\n";
+    }
+
+    file.close();
+    std::cout << "Arbre sauvegardé dans " << filename << std::endl;
+}
+
+
+void MCTS::self_play(int nb_parties) {
+    for (int i = 0; i < nb_parties; ++i) {
+        Jeu jeu_copie;
+        jeu_copie = jeu_courant;  // Copie pour ne pas modifier l'original
+        int coup = 1;
+
+        descente(jeu_copie, coup);  // Sélection d’un coup
+        int score = roll_out(jeu_copie);  // Simulation jusqu’à la fin
+        update(racine, score);  // Mise à jour des valeurs
+
+        std::cout << "Partie " << i+1 << " terminée, score : " << score << std::endl;
+    }
+
+    save_arbre("arbre2_mcts");  // Sauvegarde après entraînement
+}
+

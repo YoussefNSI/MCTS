@@ -13,45 +13,18 @@ using namespace std;
 int main()
 {
 
-    Jeu J;
 
-    std::shared_ptr<Noeud> n = std::make_shared<Noeud>(J,nullptr);
+    // // //initialise la graine du générateur aléatoire
+    std::srand(std::time(nullptr));
 
-    int coup = 0;
-    n->descente(J,coup);
-    
-    int score = n->roll_out(J);
-    n->update(score);
-    
-    std::cout << "score final : " << score << std::endl;
-    std::cout << "score final : " << n->getGain() << std::endl;
+    // création de l'Arbitre (graine , joueur 1, joueur 2 , nombre de parties)
+    Arbitre a(player::RAND, player::MCTS, NB_PARTIES);
+    // commence le challenge
+    a.challenge();
 
-
-   
-
-
-    // int score = n->roll_out(J);
-    // std::cout << "score final : " << score << std::endl;
-
-    // n->update(score);
-
-    // std::cout << n->getGain();
-
-
-    // score = n->roll_out(J);
-    // std::cout << "score final : " << score << std::endl;
-
-    // n->update(score);
-
-    // std::cout << n->getGain();
-
-
-    // //initialise la graine du générateur aléatoire
-    // std::srand(std::time(nullptr));
-
-    // // création de l'Arbitre (graine , joueur 1, joueur 2 , nombre de parties)
-    // Arbitre a (player::RAND, player::MCTS, NB_PARTIES);
-    // // commence le challenge
-    // a.challenge();
-    return 0;
+    // MCTS mcts;
+    // mcts.load_arbre("arbre2_mcts");
+    // int nb_parties = 100000;
+    // mcts.self_play(nb_parties);
+    // return 0;
 }

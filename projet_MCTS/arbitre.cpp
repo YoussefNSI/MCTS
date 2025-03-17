@@ -46,13 +46,18 @@ void Arbitre::initialisation()
   default:
     break;
   }
-  
+
+
+    // std::cout << "init \n";
   _joueur1->initialisation();
   _joueur2->initialisation();
+
+
 }
 
 void Arbitre::challenge()
 {
+
   initialisation(); // Au moins une fois pour que les objets de la ligne qui suit soient définis
     std::cout << "Le challenge de " << _nombre_parties << " parties "
               <<"entre " << _joueur1->nom() << " et " << _joueur2->nom()
@@ -62,7 +67,12 @@ void Arbitre::challenge()
     for(int i=0 ; i < _nombre_parties ; i++)
     {
         std::cout << "\n" << "Partie n°" << _numero_partie << " : ";
+
 	int resultat = partie();
+  // std::cout << "CHALLENGE : ";
+
+
+  
 	if (resultat != PAT) 
 	  (resultat == VICTOIRE ?
 	   ((_numero_partie%2)?
@@ -85,23 +95,29 @@ void Arbitre::challenge()
 
 int Arbitre::partie()
 {
+
+
   int tour = 0;
   _joueur1->init_partie();
   _joueur2->init_partie();
+
   while(!_jeu.terminal())
     {
+      std::cout << "partie " << tour << "\n";
       bool try_lock = false;
       bool coup_invalide = false;
       bool coup_illicite = false;
       tour++;
 
       _coups_mutex[_numero_partie-1].unlock();
+
       
       std::thread thread_joueur(&Joueur::jouer,
 				((tour%2)? (_joueur1) :(_joueur2) ),
 				_jeu,
 				std::ref(_coups[_numero_partie-1]),
 				std::ref(_coups_mutex[_numero_partie-1]));
+     
       
       std::this_thread::sleep_for (std::chrono::milliseconds(TEMPS_POUR_UN_COUP));
       
@@ -146,6 +162,7 @@ int Arbitre::partie()
     }
   else
     {
+    
       int resultat = (_jeu.victoire()) ? VICTOIRE : DEFAITE;
       std::cout << std::endl << ((resultat == VICTOIRE)? "Victoire" : "Défaite")  << " en " << tour-1 << " tours." << std::endl;
       return resultat;
