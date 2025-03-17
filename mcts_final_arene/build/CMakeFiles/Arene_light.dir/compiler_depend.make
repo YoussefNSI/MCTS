@@ -271,47 +271,83 @@ CMakeFiles/Arene_light.dir/MCTS.cpp.o: /home/etud/Document/Systèmes\ intelligen
   /usr/include/c++/12/bits/regex.tcc \
   /usr/include/c++/12/bits/regex_executor.h \
   /usr/include/c++/12/bits/regex_executor.tcc \
-  /usr/include/rapidjson/document.h \
-  /usr/include/rapidjson/reader.h \
-  /usr/include/rapidjson/allocators.h \
-  /usr/include/rapidjson/rapidjson.h \
+  /usr/include/nlohmann/json.hpp \
+  /usr/include/c++/12/cstddef \
+  /usr/include/c++/12/functional \
+  /usr/include/c++/12/iterator \
+  /usr/include/c++/12/bits/stream_iterator.h \
+  /usr/include/c++/12/numeric \
+  /usr/include/c++/12/bits/stl_numeric.h \
+  /usr/include/c++/12/utility \
+  /usr/include/c++/12/bits/stl_relops.h \
+  /usr/include/nlohmann/adl_serializer.hpp \
+  /usr/include/nlohmann/detail/abi_macros.hpp \
+  /usr/include/nlohmann/detail/conversions/from_json.hpp \
+  /usr/include/c++/12/array \
+  /usr/include/c++/12/compare \
+  /usr/include/c++/12/forward_list \
+  /usr/include/c++/12/bits/forward_list.h \
+  /usr/include/c++/12/bits/forward_list.tcc \
+  /usr/include/c++/12/map \
+  /usr/include/c++/12/bits/stl_multimap.h \
+  /usr/include/c++/12/valarray \
+  /usr/include/c++/12/bits/valarray_array.h \
+  /usr/include/c++/12/bits/valarray_array.tcc \
+  /usr/include/c++/12/bits/valarray_before.h \
+  /usr/include/c++/12/bits/slice_array.h \
+  /usr/include/c++/12/bits/valarray_after.h \
+  /usr/include/c++/12/bits/gslice.h \
+  /usr/include/c++/12/bits/gslice_array.h \
+  /usr/include/c++/12/bits/mask_array.h \
+  /usr/include/c++/12/bits/indirect_array.h \
+  /usr/include/nlohmann/detail/exceptions.hpp \
+  /usr/include/nlohmann/detail/value_t.hpp \
+  /usr/include/nlohmann/detail/macro_scope.hpp \
+  /usr/include/nlohmann/detail/meta/detected.hpp \
+  /usr/include/nlohmann/detail/meta/void_t.hpp \
+  /usr/include/nlohmann/thirdparty/hedley/hedley.hpp \
+  /usr/include/c++/12/version \
+  /usr/include/c++/12/cassert \
+  /usr/include/assert.h \
+  /usr/include/nlohmann/detail/string_escape.hpp \
+  /usr/include/nlohmann/detail/input/position_t.hpp \
+  /usr/include/nlohmann/detail/meta/cpp_future.hpp \
+  /usr/include/nlohmann/detail/meta/type_traits.hpp \
+  /usr/include/nlohmann/detail/iterators/iterator_traits.hpp \
+  /usr/include/nlohmann/detail/meta/call_std/begin.hpp \
+  /usr/include/nlohmann/detail/meta/call_std/end.hpp \
+  /usr/include/nlohmann/json_fwd.hpp \
+  /usr/include/nlohmann/detail/string_concat.hpp \
   /usr/include/c++/12/cstring \
   /usr/include/string.h \
   /usr/include/strings.h \
-  /usr/include/inttypes.h \
-  /usr/include/c++/12/cassert \
-  /usr/include/assert.h \
-  /usr/include/rapidjson/stream.h \
-  /usr/include/rapidjson/encodings.h \
-  /usr/include/rapidjson/encodedstream.h \
-  /usr/include/rapidjson/memorystream.h \
-  /usr/include/rapidjson/internal/meta.h \
-  /usr/include/rapidjson/rapidjson.h \
-  /usr/include/rapidjson/internal/stack.h \
-  /usr/include/rapidjson/allocators.h \
-  /usr/include/rapidjson/internal/swap.h \
-  /usr/include/rapidjson/internal/strtod.h \
-  /usr/include/rapidjson/internal/ieee754.h \
-  /usr/include/rapidjson/internal/biginteger.h \
-  /usr/include/rapidjson/internal/diyfp.h \
-  /usr/include/rapidjson/internal/pow10.h \
-  /usr/include/rapidjson/error/error.h \
-  /usr/include/rapidjson/rapidjson.h \
-  /usr/include/rapidjson/internal/strfunc.h \
-  /usr/include/rapidjson/stream.h \
-  /usr/include/c++/12/iterator \
-  /usr/include/c++/12/bits/stream_iterator.h \
-  /usr/include/c++/12/utility \
-  /usr/include/c++/12/bits/stl_relops.h \
-  /usr/include/rapidjson/prettywriter.h \
-  /usr/include/rapidjson/writer.h \
-  /usr/include/rapidjson/internal/dtoa.h \
-  /usr/include/rapidjson/internal/itoa.h \
-  /usr/include/rapidjson/internal/itoa.h \
-  /usr/include/rapidjson/stringbuffer.h \
-  /usr/include/rapidjson/stringbuffer.h \
-  /usr/include/rapidjson/filereadstream.h \
-  /usr/include/rapidjson/filewritestream.h
+  /usr/include/nlohmann/detail/meta/identity_tag.hpp \
+  /usr/include/nlohmann/detail/meta/std_fs.hpp \
+  /usr/include/nlohmann/detail/conversions/to_json.hpp \
+  /usr/include/nlohmann/detail/iterators/iteration_proxy.hpp \
+  /usr/include/nlohmann/byte_container_with_subtype.hpp \
+  /usr/include/nlohmann/detail/hash.hpp \
+  /usr/include/nlohmann/detail/input/binary_reader.hpp \
+  /usr/include/nlohmann/detail/input/input_adapters.hpp \
+  /usr/include/nlohmann/detail/input/json_sax.hpp \
+  /usr/include/nlohmann/detail/input/lexer.hpp \
+  /usr/include/nlohmann/detail/meta/is_sax.hpp \
+  /usr/include/nlohmann/detail/input/parser.hpp \
+  /usr/include/nlohmann/detail/iterators/internal_iterator.hpp \
+  /usr/include/nlohmann/detail/iterators/primitive_iterator.hpp \
+  /usr/include/nlohmann/detail/iterators/iter_impl.hpp \
+  /usr/include/nlohmann/detail/iterators/json_reverse_iterator.hpp \
+  /usr/include/nlohmann/detail/json_pointer.hpp \
+  /usr/include/nlohmann/detail/json_ref.hpp \
+  /usr/include/nlohmann/detail/output/binary_writer.hpp \
+  /usr/include/nlohmann/detail/output/output_adapters.hpp \
+  /usr/include/nlohmann/detail/output/serializer.hpp \
+  /usr/include/c++/12/iomanip \
+  /usr/include/c++/12/bits/quoted_string.h \
+  /usr/include/nlohmann/detail/conversions/to_chars.hpp \
+  /usr/include/nlohmann/ordered_map.hpp \
+  /usr/include/nlohmann/detail/macro_unscope.hpp \
+  /usr/include/nlohmann/thirdparty/hedley/hedley_undef.hpp
 
 CMakeFiles/Arene_light.dir/arbitre.cpp.o: /home/etud/Document/Systèmes\ intelligent/DISTRIBUTION/arbitre.cpp \
   /usr/include/stdc-predef.h \
@@ -1238,47 +1274,93 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/c++/12/bits/parse_numbers.h:
 
-/usr/include/rapidjson/filereadstream.h:
+/usr/include/nlohmann/detail/macro_unscope.hpp:
 
-/usr/include/rapidjson/stringbuffer.h:
+/usr/include/nlohmann/ordered_map.hpp:
 
-/usr/include/rapidjson/internal/itoa.h:
+/usr/include/c++/12/bits/quoted_string.h:
 
-/usr/include/rapidjson/internal/dtoa.h:
+/usr/include/nlohmann/detail/output/serializer.hpp:
 
-/usr/include/c++/12/bits/stl_relops.h:
+/usr/include/nlohmann/detail/output/output_adapters.hpp:
 
-/usr/include/c++/12/utility:
+/usr/include/nlohmann/detail/output/binary_writer.hpp:
 
-/usr/include/rapidjson/internal/strfunc.h:
+/usr/include/nlohmann/detail/json_pointer.hpp:
 
-/usr/include/rapidjson/internal/pow10.h:
+/usr/include/nlohmann/detail/iterators/iter_impl.hpp:
 
-/usr/include/rapidjson/internal/diyfp.h:
+/usr/include/nlohmann/detail/iterators/internal_iterator.hpp:
 
-/usr/include/rapidjson/internal/ieee754.h:
+/usr/include/nlohmann/detail/input/parser.hpp:
 
-/usr/include/rapidjson/internal/swap.h:
+/usr/include/nlohmann/detail/meta/is_sax.hpp:
 
-/usr/include/rapidjson/internal/meta.h:
+/usr/include/nlohmann/detail/input/lexer.hpp:
 
-/usr/include/rapidjson/memorystream.h:
+/usr/include/nlohmann/detail/hash.hpp:
 
-/usr/include/rapidjson/encodedstream.h:
+/usr/include/nlohmann/byte_container_with_subtype.hpp:
 
-/usr/include/rapidjson/encodings.h:
+/usr/include/string.h:
+
+/usr/include/nlohmann/json_fwd.hpp:
+
+/usr/include/nlohmann/detail/meta/call_std/begin.hpp:
+
+/usr/include/nlohmann/detail/meta/cpp_future.hpp:
+
+/usr/include/nlohmann/detail/string_escape.hpp:
 
 /usr/include/assert.h:
 
 /usr/include/c++/12/cassert:
 
-/usr/include/inttypes.h:
+/usr/include/c++/12/version:
+
+/usr/include/nlohmann/detail/meta/void_t.hpp:
+
+/usr/include/nlohmann/detail/macro_scope.hpp:
+
+/usr/include/nlohmann/detail/exceptions.hpp:
+
+/usr/include/c++/12/bits/mask_array.h:
+
+/usr/include/c++/12/bits/valarray_after.h:
+
+/usr/include/c++/12/bits/slice_array.h:
+
+/usr/include/c++/12/bits/valarray_array.tcc:
+
+/usr/include/nlohmann/detail/input/json_sax.hpp:
+
+/usr/include/nlohmann/detail/meta/call_std/end.hpp:
+
+/usr/include/c++/12/valarray:
+
+/usr/include/c++/12/bits/stl_multimap.h:
 
 /usr/include/strings.h:
 
-/usr/include/string.h:
+/usr/include/c++/12/bits/forward_list.tcc:
 
-/usr/include/rapidjson/document.h:
+/usr/include/c++/12/compare:
+
+/usr/include/c++/12/array:
+
+/usr/include/nlohmann/detail/conversions/from_json.hpp:
+
+/usr/include/nlohmann/detail/abi_macros.hpp:
+
+/usr/include/c++/12/bits/stl_relops.h:
+
+/usr/include/c++/12/utility:
+
+/usr/include/c++/12/bits/stl_numeric.h:
+
+/usr/include/c++/12/numeric:
+
+/usr/include/nlohmann/json.hpp:
 
 /usr/include/c++/12/bits/regex_executor.h:
 
@@ -1306,6 +1388,8 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/c++/12/bits/locale_facets.tcc:
 
+/usr/include/nlohmann/detail/conversions/to_json.hpp:
+
 /usr/include/c++/12/backward/auto_ptr.h:
 
 /usr/include/c++/12/bits/stl_queue.h:
@@ -1328,11 +1412,7 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/c++/12/bits/chrono.h:
 
-/usr/include/rapidjson/allocators.h:
-
 /usr/include/c++/12/clocale:
-
-/usr/include/rapidjson/writer.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/12/include/stdarg.h:
 
@@ -1376,6 +1456,8 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/c++/12/bits/std_thread.h:
 
+/usr/include/nlohmann/detail/input/position_t.hpp:
+
 /usr/include/c++/12/bits/regex.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
@@ -1390,6 +1472,8 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/stdc-predef.h:
 
+/usr/include/nlohmann/detail/iterators/primitive_iterator.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
 
 /usr/include/c++/12/algorithm:
@@ -1397,6 +1481,8 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 /usr/include/wchar.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
+
+/usr/include/nlohmann/adl_serializer.hpp:
 
 /usr/include/c++/12/cstdint:
 
@@ -1407,6 +1493,8 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 /usr/include/c++/12/functional:
 
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
+
+/usr/include/nlohmann/detail/value_t.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/12/bits/gthr-default.h:
 
@@ -1426,6 +1514,8 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/c++/12/bits/unique_lock.h:
 
+/usr/include/nlohmann/detail/iterators/iteration_proxy.hpp:
+
 /usr/include/c++/12/bits/memoryfwd.h:
 
 /usr/include/c++/12/bits/stl_pair.h:
@@ -1442,9 +1532,11 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/c++/12/bits/refwrap.h:
 
+/usr/include/c++/12/cstddef:
+
 /usr/include/c++/12/cerrno:
 
-/usr/include/rapidjson/stream.h:
+/usr/include/c++/12/bits/forward_list.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
@@ -1456,11 +1548,11 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
+/usr/include/nlohmann/detail/iterators/json_reverse_iterator.hpp:
+
 /usr/include/c++/12/bits/stringfwd.h:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
-
-/usr/include/rapidjson/reader.h:
 
 /usr/include/c++/12/iostream:
 
@@ -1500,6 +1592,8 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/features.h:
 
+/usr/include/nlohmann/detail/conversions/to_chars.hpp:
+
 /usr/include/x86_64-linux-gnu/c++/12/bits/os_defines.h:
 
 /usr/include/c++/12/bits/char_traits.h:
@@ -1530,15 +1624,15 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/x86_64-linux-gnu/bits/time64.h:
 
-/usr/include/rapidjson/internal/stack.h:
-
-/usr/include/rapidjson/rapidjson.h:
+/usr/include/c++/12/bits/gslice_array.h:
 
 /usr/include/c++/12/bits/atomic_lockfree_defines.h:
 
 /usr/include/math.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
+
+/usr/include/c++/12/bits/indirect_array.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
@@ -1574,15 +1668,17 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/x86_64-linux-gnu/sys/types.h:
 
+/usr/include/nlohmann/detail/input/binary_reader.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
 
 /usr/include/c++/12/ext/concurrence.h:
 
-/usr/include/rapidjson/filewritestream.h:
-
 /usr/include/c++/12/bits/hashtable.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
+
+/usr/include/c++/12/bits/gslice.h:
 
 /usr/include/c++/12/regex:
 
@@ -1596,6 +1692,8 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
+/usr/include/nlohmann/detail/json_ref.hpp:
+
 /usr/include/c++/12/cmath:
 
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
@@ -1605,6 +1703,8 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 /usr/include/c++/12/typeinfo:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
+
+/usr/include/nlohmann/detail/meta/type_traits.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/12/bits/atomic_word.h:
 
@@ -1625,8 +1725,6 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
-
-/usr/include/rapidjson/error/error.h:
 
 /usr/include/linux/errno.h:
 
@@ -1660,7 +1758,11 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/c++/12/bits/cxxabi_forced.h:
 
+/usr/include/c++/12/bits/valarray_before.h:
+
 /usr/include/c++/12/bits/stl_iterator_base_types.h:
+
+/usr/include/nlohmann/detail/meta/std_fs.hpp:
 
 /usr/include/c++/12/bits/atomic_base.h:
 
@@ -1674,13 +1776,15 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/c++/12/bits/stl_iterator.h:
 
-/usr/include/rapidjson/internal/strtod.h:
-
 /usr/include/c++/12/bits/uniform_int_dist.h:
 
 /usr/include/c++/12/bits/ptr_traits.h:
 
+/usr/include/nlohmann/thirdparty/hedley/hedley_undef.hpp:
+
 /usr/include/c++/12/bits/stl_function.h:
+
+/usr/include/nlohmann/thirdparty/hedley/hedley.hpp:
 
 /usr/include/c++/12/bits/std_function.h:
 
@@ -1690,7 +1794,11 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/c++/12/backward/binders.h:
 
+/usr/include/nlohmann/detail/input/input_adapters.hpp:
+
 /usr/include/c++/12/bits/stl_algobase.h:
+
+/usr/include/c++/12/iomanip:
 
 /usr/include/c++/12/debug/debug.h:
 
@@ -1726,9 +1834,13 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/asm-generic/errno.h:
 
+/usr/include/c++/12/map:
+
 /usr/include/c++/12/bits/charconv.h:
 
 /usr/include/c++/12/bits/basic_string.tcc:
+
+/usr/include/nlohmann/detail/meta/detected.hpp:
 
 /usr/include/c++/12/bits/regex_compiler.h:
 
@@ -1753,6 +1865,8 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 /usr/include/c++/12/iterator:
 
 /usr/include/c++/12/bits/unique_ptr.h:
+
+/usr/include/c++/12/forward_list:
 
 /usr/include/c++/12/bits/streambuf_iterator.h:
 
@@ -1786,6 +1900,8 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/c++/12/bits/shared_ptr_base.h:
 
+/usr/include/nlohmann/detail/iterators/iterator_traits.hpp:
+
 /usr/include/c++/12/bits/nested_exception.h:
 
 /usr/include/c++/12/bits/allocated_ptr.h:
@@ -1798,7 +1914,7 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/c++/12/bits/stl_vector.h:
 
-/usr/include/rapidjson/internal/biginteger.h:
+/usr/include/nlohmann/detail/meta/identity_tag.hpp:
 
 /usr/include/c++/12/bits/stl_bvector.h:
 
@@ -1807,6 +1923,8 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 /usr/include/c++/12/limits:
 
 /usr/include/c++/12/bits/stl_algo.h:
+
+/usr/include/nlohmann/detail/string_concat.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/floatn-common.h:
 
@@ -1846,13 +1964,13 @@ CMakeFiles/Arene_light.dir/main.cpp.o: /home/etud/Document/Systèmes\ intelligen
 
 /usr/include/c++/12/deque:
 
-/usr/include/rapidjson/prettywriter.h:
-
 /usr/include/c++/12/unordered_map:
 
 /usr/include/c++/12/bits/enable_special_members.h:
 
 /usr/include/c++/12/bits/unordered_map.h:
+
+/usr/include/c++/12/bits/valarray_array.h:
 
 /usr/include/c++/12/bits/erase_if.h:
 

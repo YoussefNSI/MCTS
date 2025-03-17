@@ -11,7 +11,7 @@ using namespace std;
 
 int main()
 {
-    MCTSTrainer trainer(3000, 500);
+    MCTSTrainer trainer(50000, 100);
     trainer.train();
     std::cout << "Entraînement terminé" << std::endl;
 

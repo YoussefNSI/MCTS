@@ -8,11 +8,6 @@
 #include <queue>
 #include <unordered_set>
 #include <regex>
-#include <rapidjson/document.h>
-#include <rapidjson/prettywriter.h>
-#include <rapidjson/stringbuffer.h>
-#include <rapidjson/filereadstream.h>
-#include <rapidjson/filewritestream.h>
 
 Noeud::Noeud(int state, std::shared_ptr<Noeud> p, int coup)
     : state_val(state), visite_count(0), total_reward(0.0),
@@ -25,7 +20,7 @@ bool Noeud::est_terminal(const Jeu &game) const
 
 bool Noeud::est_completement_developpe(const Jeu &game)
 {
-    return coups_possibles.size() >= game.nb_coups();
+    return coups_possibles.size() >= static_cast<std::vector<int>::size_type>(game.nb_coups());
 }
 
 double Noeud::calcul_ucb(double exploration_param) const
@@ -180,118 +175,112 @@ int MCTS::meilleur_coup()
 }
 
 
-using namespace rapidjson;
+#include <iostream>
+#include <fstream>
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 
 void MCTS::save_arbre(const std::string& filename) {
-    Document d(kObjectType);
-    Document::AllocatorType& allocator = d.GetAllocator();
-    
+    json j;
     std::unordered_map<std::shared_ptr<Noeud>, int> node_ids;
     std::queue<std::shared_ptr<Noeud>> queue;
     int current_id = 0;
-    
+
     // Sauvegarde de la racine
     queue.push(racine);
     node_ids[racine] = current_id++;
-    
-    Value nodes(kObjectType);
+
     while (!queue.empty()) {
         auto node = queue.front();
         queue.pop();
-        
-        Value nodeValue(kObjectType);
-        nodeValue.AddMember("state", node->state_val, allocator);
-        nodeValue.AddMember("visits", node->visite_count, allocator);
-        nodeValue.AddMember("reward", node->total_reward, allocator);
-        nodeValue.AddMember("coup", node->coup_from_parent, allocator);
-        
+
+        json node_json;
+        node_json["state"] = node->state_val;
+        node_json["visits"] = node->visite_count;
+        node_json["reward"] = node->total_reward;
+        node_json["coup"] = node->coup_from_parent;
+
         // Parent
         if (auto parent = node->parent.lock()) {
-            nodeValue.AddMember("parent", node_ids[parent], allocator);
+            node_json["parent"] = node_ids[parent];
         } else {
-            nodeValue.AddMember("parent", -1, allocator);
+            node_json["parent"] = -1;
         }
-        
+
         // Enfants
-        Value children(kArrayType);
+        std::vector<int> children;
         for (auto& child : node->enfants) {
             if (!node_ids.count(child)) {
                 node_ids[child] = current_id++;
                 queue.push(child);
             }
-            children.PushBack(node_ids[child], allocator);
+            children.push_back(node_ids[child]);
         }
-        nodeValue.AddMember("children", children, allocator);
-        
+        node_json["children"] = children;
+
         // Ajout au document
-        nodes.AddMember(Value(std::to_string(node_ids[node]).c_str(), allocator), nodeValue, allocator);
+        j["nodes"][std::to_string(node_ids[node])] = node_json;
     }
-    
-    d.AddMember("nodes", nodes, allocator);
-    d.AddMember("root_id", node_ids[racine], allocator);
-    
+
+    j["root_id"] = node_ids[racine];
+
     // Écriture fichier
-    FILE* fp = fopen(filename.c_str(), "wb");
-    char writeBuffer[65536];
-    FileWriteStream os(fp, writeBuffer, sizeof(writeBuffer));
-    PrettyWriter<FileWriteStream> writer(os);
-    d.Accept(writer);
-    fclose(fp);
+    std::ofstream file(filename);
+    file << j.dump(4);
+    file.close();
 }
 
 void MCTS::load_arbre(const std::string& filename) {
-    FILE* fp = fopen(filename.c_str(), "rb");
-    if (!fp) throw std::runtime_error("Cannot open file");
-    
-    char readBuffer[65536];
-    FileReadStream is(fp, readBuffer, sizeof(readBuffer));
-    Document d;
-    d.ParseStream(is);
-    fclose(fp);
-    
-    if (!d.HasMember("nodes") || !d.HasMember("root_id"))
+    std::ifstream file(filename);
+    if (!file.is_open()) throw std::runtime_error("Cannot open file");
+
+    json j;
+    file >> j;
+    file.close();
+
+    if (!j.contains("nodes") || !j.contains("root_id"))
         throw std::runtime_error("Format de fichier invalide");
-    
+
     std::unordered_map<int, std::shared_ptr<Noeud>> node_map;
-    const Value& nodes = d["nodes"];
-    
+    const auto& nodes = j["nodes"];
+
     // Première passe : créer tous les noeuds
-    for (Value::ConstMemberIterator itr = nodes.MemberBegin(); itr != nodes.MemberEnd(); ++itr) {
-        int id = std::stoi(itr->name.GetString());
-        const Value& nodeValue = itr->value;
-        
+    for (auto it = nodes.begin(); it != nodes.end(); ++it) {
+        int id = std::stoi(it.key());
+        const auto& node_json = it.value();
+
         auto node = std::make_shared<Noeud>(
-            nodeValue["state"].GetInt(),
+            node_json["state"].get<int>(),
             nullptr,
-            nodeValue["coup"].GetInt()
+            node_json["coup"].get<int>()
         );
-        node->visite_count = nodeValue["visits"].GetInt();
-        node->total_reward = nodeValue["reward"].GetDouble();
-        
+        node->visite_count = node_json["visits"].get<int>();
+        node->total_reward = node_json["reward"].get<double>();
+
         node_map[id] = node;
     }
-    
+
     // Deuxième passe : lier les relations
-    for (Value::ConstMemberIterator itr = nodes.MemberBegin(); itr != nodes.MemberEnd(); ++itr) {
-        int id = std::stoi(itr->name.GetString());
-        const Value& nodeValue = itr->value;
+    for (auto it = nodes.begin(); it != nodes.end(); ++it) {
+        int id = std::stoi(it.key());
+        const auto& node_json = it.value();
         auto node = node_map[id];
-        
+
         // Parent
-        int parent_id = nodeValue["parent"].GetInt();
+        int parent_id = node_json["parent"].get<int>();
         if (parent_id != -1) {
             node->parent = node_map[parent_id];
         }
-        
+
         // Enfants
-        const Value& children = nodeValue["children"];
-        for (SizeType i = 0; i < children.Size(); i++) {
-            node->enfants.push_back(node_map[children[i].GetInt()]);
+        for (const auto& child_id : node_json["children"]) {
+            node->enfants.push_back(node_map[child_id.get<int>()]);
         }
     }
-    
+
     // Définir la racine
-    int root_id = d["root_id"].GetInt();
+    int root_id = j["root_id"].get<int>();
     if (node_map.count(root_id)) {
         racine = node_map[root_id];
     } else {
