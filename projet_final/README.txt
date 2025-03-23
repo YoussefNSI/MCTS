@@ -1,0 +1,1 @@
+L'arbre entrainé est dans le fichier build, il s'appelle "expert_mcts.json". Je met un deuxième exemplaire dans l'archive au cas où le cmake le supprime.
